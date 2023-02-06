@@ -3,50 +3,50 @@
 std::vector<Phone> phones;
 
 Phone::Phone() {
-	std::cout << "?";
+    std::cout << "?";
 }
 
 Phone::Phone(std::string brandName, std::string modelName, std::string formFactor, int yearOfIssue, int screenSize, int price) {
-	this->brandName = brandName;
-	this->modelName = modelName;
-	this->formFactor = formFactor;
-	this->yearOfIssue = yearOfIssue;
-	this->screenSize = screenSize;
-	this->price = price;
-	this->phoneID = phones.size() + 1;
+    this->brandName = brandName;
+    this->modelName = modelName;
+    this->formFactor = formFactor;
+    this->yearOfIssue = yearOfIssue;
+    this->screenSize = screenSize;
+    this->price = price;
+    this->phoneID = phones.size() + 1;
 
-	phones.push_back(*this);
+    phones.push_back(*this);
 }
 
 std::string Phone::getBrandName() {
-	return this->brandName;
+    return this->brandName;
 }
 
 std::string Phone::getFormFactor() {
-	return this->formFactor;
+    return this->formFactor;
 }
 
 int Phone::getScreenSize() {
-	return this->screenSize;
+    return this->screenSize;
 }
 
 int Phone::getPhoneID() {
-	return this->phoneID;
+    return this->phoneID;
 }
 
 std::string Phone::toString() {
-	std::string phoneString = "";
+    std::string phoneString = "";
 
-	phoneString = "ID: " + std::to_string(this->phoneID) + "\n Brand Name: " + this->brandName + "\n  Model Name: " + this->modelName  
-        + "\n    Form Factor: " + this->formFactor + "\n    Screen Size: " + std::to_string(this->screenSize) 
+    phoneString = "ID: " + std::to_string(this->phoneID) + "\n Brand Name: " + this->brandName + "\n  Model Name: " + this->modelName
+        + "\n    Form Factor: " + this->formFactor + "\n    Screen Size: " + std::to_string(this->screenSize)
         + "\nPrice: " + std::to_string(this->price) + "\n--------------------\n";
 
-	return phoneString;
+    return phoneString;
 
 }
 
 Phone::~Phone() {
-	std::cout << "Phone deleted\n";
+    std::cout << "Phone deleted\n";
 }
 
 //template for finding maximum values for report 3 and 4
@@ -85,13 +85,13 @@ void addPhone() {
 
     std::cout << "Input brand name: ";
     std::getline(std::cin >> std::ws, brandName);
-    
+
     std::cout << "Input model name: ";
     std::getline(std::cin, modelName);
-    
+
     std::cout << "Input form factor: ";
     std::getline(std::cin, formFactor);
-    
+
     std::cout << "Now please input the year of issue, screen size and price in one line, separated by spaces: " << std::endl;
     std::cin >> yearOfIssue >> screenSize >> price;
     std::cout << std::endl;
@@ -122,7 +122,15 @@ void report(std::vector<std::string> names) {
 }
 
 void report(std::vector<int> screenSizes) {
-    std::cout << "TOP screen size is: " << findMax(screenSizes) << std::endl;
+    std::cout << "TOP-3 screen sizes: " << std::endl;
+
+    for (int i = 0; i < 3; i++) {
+        int maxValue = findMax(screenSizes);
+        std::vector<int>::iterator removeMax;
+        removeMax = remove(screenSizes.begin(), screenSizes.end(), maxValue);
+        std::cout << i + 1 << ": " << maxValue << std::endl;
+    }
+
 }
 
 void report() {
